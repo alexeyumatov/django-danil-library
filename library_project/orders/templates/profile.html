@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="mb-5">
+        <h2 class="mb-3">Профиль пользователя</h2>
+        <div class="p-3 bg-light rounded-4 shadow-sm">
+            <p class="mb-1"><strong>Полное имя:</strong> {{ user.fullname }}</p>
+            <p class="mb-0"><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+    </div>
+
+    <div>
+        <h3 class="mb-4">Ваши заказы</h3>
+        {% if orders %}
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                {% for order in orders %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ order.book.title }}</h5>
+                                <p class="card-text mb-1"><strong>Адрес доставки:</strong> {{ order.user_address }}</p>
+                                <p class="card-text mb-1"><strong>Комментарий:</strong> {{ order.comment|default:"—" }}</p>
+                                <p class="text-muted small mb-0">Заказ оформлен на: {{ order.user_name }} ({{ order.user_email }})</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">У вас пока нет заказов.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

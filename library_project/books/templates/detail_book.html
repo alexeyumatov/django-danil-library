@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Обложка -->
+        <div class="col-md-4 text-center">
+            {% if book.cover %}
+                <img src="{{ book.cover.url }}" class="img-fluid rounded shadow-sm mb-3" alt="{{ book.title }}">
+            {% else %}
+                <div class="bg-light text-muted d-flex align-items-center justify-content-center" style="height: 300px;">
+                    Нет обложки
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Информация о книге -->
+        <div class="col-md-8">
+            <h2>{{ book.title }}</h2>
+            <p><strong>Автор:</strong> {{ book.author }}</p>
+            <p><strong>Жанр:</strong> {{ book.genre }}</p>
+            <p><strong>Год:</strong> {{ book.year }}</p>
+            <p class="mt-4">{{ book.description }}</p>
+        </div>
+    </div>
+
+    <hr class="my-5" />
+
+    <!-- Форма заказа -->
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-4 text-center">Заказать книгу</h4>
+                    <form action="{% url 'create_order' book.id %}" method="post" novalidate>
+                        {% csrf_token %}
+
+                        {% if user.is_authenticated %}
+                            <div class="mb-3">
+                                <label class="form-label">Имя пользователя</label>
+                                <input type="text" name="user_name" value="{{ user.fullname }}" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" name="user_email" value="{{ user.email }}" class="form-control" readonly>
+                            </div>
+                        {% else %}
+                            <div class="mb-3">
+                                <label class="form-label">Имя пользователя</label>
+                                <input type="text" name="user_name" class="form-control" placeholder="Введите ваше имя">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" name="user_email" class="form-control" placeholder="Введите ваш email">
+                            </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Адрес доставки</label>
+                            <input type="text" name="user_address" class="form-control" placeholder="Укажите адрес">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Комментарий к заказу</label>
+                            <textarea name="comment" rows="3" class="form-control" placeholder="Напишите, если есть пожелания"></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Заказать</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

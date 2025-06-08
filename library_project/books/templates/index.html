@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="text-white text-center py-5" style="background-color: #99dbdd;">
+    <div class="container">
+        <h1 class="display-5 fw-bold">Онлайн-библиотека</h1>
+        <p class="lead">Читай. Заказывай. Делись впечатлениями.</p>
+        <a href="{% url 'books' %}" class="btn btn-light mt-3 rounded-pill shadow-sm">Перейти к книгам</a>
+    </div>
+</header>
+
+<section class="py-5" style="background-color: #f7f7f7;">
+    <div class="container">
+        <h2 class="text-center mb-5">Что вы найдёте у нас?</h2>
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="p-4 rounded-4 shadow-sm bg-white h-100">
+                    <i class="bi bi-book" style="font-size: 2rem; color: #6c757d;"></i>
+                    <h5 class="mt-3">Большой каталог</h5>
+                    <p>Фантастика, классика, современная литература — на любой вкус.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 rounded-4 shadow-sm bg-white h-100">
+                    <i class="bi bi-cart" style="font-size: 2rem; color: #6c757d;"></i>
+                    <h5 class="mt-3">Простой заказ</h5>
+                    <p>Выберите книгу и оформите заказ за пару минут.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 rounded-4 shadow-sm bg-white h-100">
+                    <i class="bi bi-chat-dots" style="font-size: 2rem; color: #6c757d;"></i>
+                    <h5 class="mt-3">Обратная связь</h5>
+                    <p>Есть предложение? Напишите нам — мы вас услышим.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 text-center" style="background-color: #e3f4f4;">
+    <div class="container">
+        <h2 class="mb-4">Хотите оставить отзыв?</h2>
+        <a href="{% url 'feedback' %}" class="btn btn-outline-primary btn-lg rounded-pill shadow-sm">Форма обратной связи</a>
+    </div>
+</section>
+{% endblock %}
